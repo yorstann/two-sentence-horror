@@ -1,16 +1,23 @@
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
 
-// two-sentence entry for make.fun's "Two-Sentence Horror" bounty: a quiet horror story in exactly two sentences, where the second re-frames the first.
-// Pass 2: split into the two sentences — the setup, then the re-frame that makes the first sentence read worse.
-const ENTRY_BEATS = [
+// Two-sentence entry for make.fun's "Two-Sentence Horror"
+// bounty. The program writes a quiet horror story in exactly
+// two sentences to /output/entry.txt (or $OUTPUT_DIR/entry.txt).
+// The first sentence is a harmless routine; the second re-frames
+// it so the first reads worse the second time. Pass 2: the story
+// is split into its two sentences — the setup, then the re-frame —
+// because the horror lives in the join between them: nothing is
+// explained, nothing gory happens, something simply answers.
+// buildEntryText() is the single source of truth for the exact text;
+// nothing below duplicates the story.
+const ENTRY_SENTENCES = [
   "Every night at 3 a.m., my husband sleepwalks to the front door and rattles the handle exactly three times, and his doctor calls it harmless.",
   "Last night I stayed up to watch, and from the porch, in the dark, something rattled it three times back.",
 ] as const;
 
-
 export function buildEntryText(): string {
-  return ENTRY_BEATS.join(" ");
+  return ENTRY_SENTENCES.join(" ");
 }
 
 export const ENTRY_TEXT = buildEntryText();
